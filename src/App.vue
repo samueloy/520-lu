@@ -6,7 +6,21 @@
 </template>
 
 <script setup>
-// 这里可以添加全局的逻辑
+import { onMounted, ref } from 'vue';
+// 引入背景音乐文件
+import bgm from './assets/audios/bgm.mp3';
+
+// 创建音频对象
+const audio = ref(new Audio(bgm));
+
+onMounted(() => {
+  // 设置循环播放
+  audio.value.loop = true;
+  // 播放音乐
+  audio.value.play().catch((error) => {
+    console.warn('自动播放音乐失败，用户需先与页面交互', error);
+  });
+});
 </script>
 
 <style>
